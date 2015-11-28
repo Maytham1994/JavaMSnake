@@ -7,7 +7,7 @@ public class SnakeLogic {
 	private int filled;
 	private int baitLocation;
 	private Random random;
-	
+	private MSnakeFrame snakeFrame;
 	
 	// constructor
 	public SnakeLogic(){
@@ -15,6 +15,7 @@ public class SnakeLogic {
 		filled = 0;
 		baitLocation = 0;
 		random = new Random();
+		snakeFrame = new MSnakeFrame();
 	}
 	
 	public static void main(String [] args)
@@ -26,7 +27,12 @@ public class SnakeLogic {
 	public void mainLogic(){
 		mainboard[0] = 45;
 		mainboard[1] = 55;
-		filled = 2;
+		mainboard[2] = 65;
+		mainboard[3] = 64;
+		mainboard[4] = 63;
+		mainboard[5] = 53;
+		mainboard[6] = 52;
+		filled = 7;
 		int timer = 0;
 		for(;;){
 			timer++;
@@ -135,6 +141,7 @@ public class SnakeLogic {
 				System.out.print(".");
 			}
 		}
+		snakeFrame.updateSnake(mainboard, filled);
 	}
 	
 	private boolean isOutside(int firstMove){
