@@ -175,19 +175,23 @@ public class SnakeLogic{
 	private boolean isOutside(int firstMove){
 		int head = 0;
 		if(mainboard[head] < 10){
-			if(((mainboard[head] != 0)&&(firstMove == -10))||((mainboard[head] == 0)&&(firstMove < 0))){
+			if(((mainboard[head] != 0)&&(firstMove == -10))
+					||((mainboard[head] == 0)&&(firstMove < 0))
+					||((mainboard[head] == 9)&&(firstMove == 1))){
 				return true;
 			}
-		}else if(mainboard[head] > 90){
-			if(((mainboard[head] != 99)&&(firstMove == 10))||((mainboard[head] == 99)&&(firstMove > 0))){
+		}else if(mainboard[head] >= 90){
+			if(((mainboard[head] != 99)&&(firstMove == 10))
+					||((mainboard[head] == 99)&&(firstMove > 0))
+					||((mainboard[head] == 90)&&(firstMove == -1))){
 				return true;
 			}
 		}else if((mainboard[head]%10) == 9){
-			if(firstMove > 0){
+			if(firstMove == 1){
 				return true;
 			}
 		}else if((mainboard[head]%10) == 0){
-			if(firstMove < 0){
+			if(firstMove == -1){
 				return true;
 			}
 		}
