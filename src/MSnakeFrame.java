@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,17 +19,15 @@ import javax.swing.border.EmptyBorder;
 public class MSnakeFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel menuPane;
 	private GridBagConstraints gridConstraintsContent;
-	private GridBagConstraints gridConstraintsMenu;
 	private JLabel[] snakeLocations;
-	private JButton[] buttons;
 
 	/**
 	 * Create the frame.
 	 */
 	public MSnakeFrame() {
 		this.setName("MSnake");
+		this.setTitle("MSnake");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(150, 150, 700, 550);
 		this.setMaximumSize(new Dimension(700,550));
@@ -37,6 +36,7 @@ public class MSnakeFrame extends JFrame {
 		
 		this.setVisible(true);
 		this.pack();
+		this.setFocusable(true);
 	}
 	
 	private void setGridBagLayout(){
@@ -50,16 +50,6 @@ public class MSnakeFrame extends JFrame {
 		gridConstraintsContent.gridy = 0;
 		this.createContentPanel();
 		this.add(contentPane, gridConstraintsContent);
-		
-		gridConstraintsMenu = new GridBagConstraints();
-		gridConstraintsMenu.fill = GridBagConstraints.HORIZONTAL;
-		gridConstraintsMenu.insets = new Insets(5, 5, 5, 5);
-		gridConstraintsMenu.ipadx = 60;
-		gridConstraintsMenu.ipady = 30;
-		gridConstraintsMenu.gridx = 1;
-		gridConstraintsMenu.gridy = 0;
-		this.createMenuPanel();
-		this.add(menuPane, gridConstraintsMenu);
 	}
 	
 	private void createContentPanel(){
@@ -82,37 +72,20 @@ public class MSnakeFrame extends JFrame {
 		
 	}
 	
-	private void createMenuPanel(){
-		menuPane = new JPanel();
-		Border border = BorderFactory.createLineBorder(Color.black, 2);
-		menuPane.setBorder(border);
-		menuPane.setLayout(new GridLayout(2,1));
-		menuPane.setSize(new Dimension(120, 60));
-		menuPane.setBackground(Color.white);
-		
-		this.createButtons();		
-	}
-	
-	private void createButtons(){
-		buttons = new JButton[2];
-		Dimension dimension = new Dimension(30, 10);
-		
-		buttons[0] = new JButton("Start");
-		buttons[0].setPreferredSize(dimension);
-		menuPane.add(buttons[0]);
-		
-		buttons[1] = new JButton("Stop");
-		buttons[1].setPreferredSize(dimension);
-		menuPane.add(buttons[1]);
-	}
-	
-	public void updateSnake(int[] mainBoard, int filled){
+	public void updateSnakeandBait(int[] mainBoard, int filled, int baitLocation){
 		for(int i = 0; i < 100; i++){
 			snakeLocations[i].setBackground(Color.white);
 		}
-		for(int i = 0; i < filled; i++){
+		snakeLocations[mainBoard[0]].setBackground(Color.black);
+		snakeLocations[baitLocation].setBackground(Color.red);
+		for(int i = 1; i < filled; i++){
 			snakeLocations[mainBoard[i]].setBackground(Color.blue);
 		}
 	}
+	
+	public void updateKeyListener(KeyListener listener){
+		contentPane.addKeyListener(listener);
+	}
+
 
 }
