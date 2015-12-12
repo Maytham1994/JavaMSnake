@@ -26,7 +26,15 @@ public class SnakeLogic{
 	private int[] randomCenter;
 	// direction string to tell the snake where to move next (works with the keyboard presses)
 	private String direction;
-	
+	// difficulty levels
+	private static Object[] difficulties = {"Extreme",
+            "Hard",
+            "Normal",
+            "Easy"};
+	// maximum index of the difficulty level options
+	private static int difficultyMaxIndex = 3;
+	// Difficulty level
+	private int difficulty;
 	/**
 	 * 	This is the constructor for the SnakeLogic class. 
 	 * 	It creates the SnakeLogic which the game is based on
@@ -58,12 +66,13 @@ public class SnakeLogic{
 		filled = 1;
 		direction = "";
 		this.newBaitLocation();
+		selectDifficulty();
 		try {
 	        while (true) {
 	        	printSnake();
-				Thread.sleep(9 * 10);
+				Thread.sleep(difficulty * 10);
 				snakeMove(direction);
-				Thread.sleep(9 * 10);
+				Thread.sleep(5 * 10);
 	        }
 	    } catch (InterruptedException e) {
 	        e.printStackTrace();
@@ -267,5 +276,29 @@ public class SnakeLogic{
 		}
 	}
 	
+	/**
+	 * 	selectDifficulty:
+	 * 	Selects the difficulty of the game between Extreme, Hard, Normal, Easy 
+	 * 
+	 */
+	private void selectDifficulty(){
+		int n = JOptionPane.showOptionDialog(snakeFrame,
+				"Select Difficulty",
+				"WILL YOU EXCEPT THE CHALLENGE!!",
+				JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE,
+				null,
+				difficulties,
+				difficulties[difficultyMaxIndex]);
+		if(n==0){
+			difficulty = 2;
+		}else if(n==1){
+			difficulty = 5;
+		}else if(n==2){
+			difficulty = 10;
+		}else if(n==3){
+			difficulty = 15;
+		}
+	}
 	
 }
