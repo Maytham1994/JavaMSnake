@@ -43,13 +43,13 @@ public class SnakeLogic{
 	 */
 	public SnakeLogic(){
 		// initialize the mainboard array with 100
-		mainboard = new int[100];
+		mainboard = new int[10000];
 		// initialize the filled with 0
 		filled = 0;
 		// initialize the new random object
 		random = new Random();
 		// initialize the center 4 spots in an array
-		randomCenter = new int[]{44,45,54,55};
+		randomCenter = new int[]{4849,4949,4850,4950};
 		// initialize the MSnakeFrame which has the frame, panels and so on
 		snakeFrame = new MSnakeFrame();
 	}
@@ -73,7 +73,7 @@ public class SnakeLogic{
 		try {
 	        while (true) {
 	        	printSnake();
-				Thread.sleep(difficulty * 10);
+				Thread.sleep(difficulty * 1);
 				snakeMove(direction);
 				Thread.sleep(5 * 10);
 	        }
@@ -96,9 +96,9 @@ public class SnakeLogic{
 		}else if(buttonClick.equals("left")){
 			firstMove = -1;
 		}else if(buttonClick.equals("up")){
-			firstMove = -10;
+			firstMove = -100;
 		}else if(buttonClick.equals("down")){
-			firstMove = 10;
+			firstMove = 100;
 		}
 		isEaton(firstMove);
 		moveSnake(firstMove);
@@ -157,7 +157,7 @@ public class SnakeLogic{
 		int rand=0;
 		boolean isEat = true;
 		while(isEat){
-			rand = random.nextInt(100);
+			rand = random.nextInt(10000);
 			for(int i = filled-1; i >= 0; i--){
 				if(rand == mainboard[i]){
 					isEat = true;
@@ -187,23 +187,23 @@ public class SnakeLogic{
 	 */
 	private boolean isOutside(int firstMove){
 		int head = 0;
-		if(mainboard[head] < 10){
-			if(((mainboard[head] != 0)&&(firstMove == -10))
+		if(mainboard[head] < 100){
+			if(((mainboard[head] != 0)&&(firstMove == -100))
 					||((mainboard[head] == 0)&&(firstMove < 0))
-					||((mainboard[head] == 9)&&(firstMove == 1))){
+					||((mainboard[head] == 99)&&(firstMove == 1))){
 				return true;
 			}
-		}else if(mainboard[head] >= 90){
-			if(((mainboard[head] != 99)&&(firstMove == 10))
-					||((mainboard[head] == 99)&&(firstMove > 0))
-					||((mainboard[head] == 90)&&(firstMove == -1))){
+		}else if(mainboard[head] >= 9900){
+			if(((mainboard[head] != 9999)&&(firstMove == 100))
+					||((mainboard[head] == 9999)&&(firstMove > 0))
+					||((mainboard[head] == 9900)&&(firstMove == -1))){
 				return true;
 			}
-		}else if((mainboard[head]%10) == 9){
+		}else if((mainboard[head]%100) == 99){
 			if(firstMove == 1){
 				return true;
 			}
-		}else if((mainboard[head]%10) == 0){
+		}else if((mainboard[head]%100) == 0){
 			if(firstMove == -1){
 				return true;
 			}
@@ -222,11 +222,11 @@ public class SnakeLogic{
 		int head = 0;
 		if((newDirection.equals("right")) && ((mainboard[head]-mainboard[head+1]) == -1)){
 			return;
-		}else if((newDirection.equals("up")) && ((mainboard[head]-mainboard[head+1]) == 10)){
+		}else if((newDirection.equals("up")) && ((mainboard[head]-mainboard[head+1]) == 100)){
 			return;
 		}else if((newDirection.equals("left")) && ((mainboard[head]-mainboard[head+1]) == 1)){
 			return;
-		}else if((newDirection.equals("down")) && ((mainboard[head]-mainboard[head+1]) == -10)){
+		}else if((newDirection.equals("down")) && ((mainboard[head]-mainboard[head+1]) == -100)){
 			return;
 		}
 		direction = newDirection;
@@ -248,7 +248,7 @@ public class SnakeLogic{
 	 *  	- Checks to see if the player won when filled reaches maximum
 	 */
 	private void isWon() {
-		if(filled == 100){
+		if(filled == 10000){
 			int reply = JOptionPane.showConfirmDialog(snakeFrame,
 					"You Won, would you like to restart the game?",
 					"YOU WON !!!",

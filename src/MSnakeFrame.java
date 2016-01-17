@@ -42,8 +42,8 @@ public class MSnakeFrame extends JFrame {
 		// set the clost operation when the program exits
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// set the bounds and the maximum size
-		this.setBounds(150, 150, 700, 550);
-		this.setMaximumSize(new Dimension(700,550));
+		this.setBounds(150, 150, 7000, 5500);
+		this.setMaximumSize(new Dimension(7000,5500));
 		
 		// set the gridbaglayout
 		this.setGridBagLayout();
@@ -63,8 +63,8 @@ public class MSnakeFrame extends JFrame {
 		
 		gridConstraintsContent = new GridBagConstraints();
 		gridConstraintsContent.fill = GridBagConstraints.HORIZONTAL;
-		gridConstraintsContent.ipadx = 400;
-		gridConstraintsContent.ipady = 400;
+		gridConstraintsContent.ipadx = 700;
+		gridConstraintsContent.ipady = 700;
 		gridConstraintsContent.gridx = 0;
 		gridConstraintsContent.gridy = 0;
 		this.createContentPanel();
@@ -80,12 +80,12 @@ public class MSnakeFrame extends JFrame {
 		Border border = BorderFactory.createLineBorder(Color.black, 1);
 		contentPane.setBorder(border);
 		contentPane.setSize(400, 400);
-		contentPane.setLayout(new GridLayout(10,10));
+		contentPane.setLayout(new GridLayout(100,100));
 		
-		snakeLocations = new JLabel[100];
-		for(int i = 0; i < 100; i++){
+		snakeLocations = new JLabel[10000];
+		for(int i = 0; i < 10000; i++){
 			snakeLocations[i] = new JLabel("");
-			snakeLocations[i].setSize(40,40);
+			snakeLocations[i].setSize(2,2);
 			snakeLocations[i].setBorder(border);
 			snakeLocations[i].setOpaque(true);
 			snakeLocations[i].setBackground(Color.white);
@@ -130,7 +130,7 @@ public class MSnakeFrame extends JFrame {
 	 *  	- Restarts the Gui after restarting the game
 	 */
 	public void restartGui(){
-		for (int i = 0; i < 100; i++){
+		for (int i = 0; i < 10000; i++){
 			snakeLocations[i].setBackground(Color.white);
 		}
 	}
