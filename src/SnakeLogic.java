@@ -14,6 +14,8 @@ public class SnakeLogic{
 	// private variables
 	// mainboard is the spots in the game where the snake is located
 	private int[] mainboard;
+	// lastLocation is the last location that the snake's tail was on. 
+	private int lastLocation;
 	// filled tells how many spots are filled in the board
 	private int filled;
 	// baitLocation contains the location of the bait which the snake needs to eat
@@ -67,6 +69,7 @@ public class SnakeLogic{
 		direction = "";
 		this.newBaitLocation();
 		selectDifficulty();
+		snakeFrame.restartGui();
 		try {
 	        while (true) {
 	        	printSnake();
@@ -121,6 +124,7 @@ public class SnakeLogic{
 			}
 			System.exit(0);
 		}
+		lastLocation = mainboard[filled-1];
 		for(int i = filled-1; i >= 0; i--){
 			if(i == 0){
 				mainboard[i] += firstMove;
@@ -172,7 +176,7 @@ public class SnakeLogic{
 	 * 
 	 */
 	private void printSnake(){
-		snakeFrame.updateSnakeandBait(mainboard, filled, baitLocation);
+		snakeFrame.updateSnakeandBait(mainboard[0], lastLocation, baitLocation, mainboard[1], filled);
 	}
 	
 	/**

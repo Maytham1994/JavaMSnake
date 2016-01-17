@@ -99,18 +99,20 @@ public class MSnakeFrame extends JFrame {
 	 *  updateSnakeandBait:
 	 *  	- Updates the GUI with the snake and the bait location
 	 *  
-	 * @param mainBoard the mainboard array which contains the snake
-	 * @param filled the number of filled spots in the array
+	 * @param head 
+	 * @param removed 
 	 * @param baitLocation the location of the bait
+	 * @param kneck
+	 * @param filled the number of filled spots in the array
 	 */
-	public void updateSnakeandBait(int[] mainBoard, int filled, int baitLocation){
-		for(int i = 0; i < 100; i++){
-			snakeLocations[i].setBackground(Color.white);
-		}
-		snakeLocations[mainBoard[0]].setBackground(Color.black);
+	public void updateSnakeandBait(int head, int removed, int baitLocation, int kneck, int filled){
+		snakeLocations[removed].setBackground(Color.white);
+		snakeLocations[head].setBackground(Color.black);
 		snakeLocations[baitLocation].setBackground(Color.red);
-		for(int i = 1; i < filled; i++){
-			snakeLocations[mainBoard[i]].setBackground(Color.blue);
+		if (filled == 1){
+			snakeLocations[kneck].setBackground(Color.white);
+		}else{
+			snakeLocations[kneck].setBackground(Color.blue);
 		}
 	}
 	
@@ -121,6 +123,16 @@ public class MSnakeFrame extends JFrame {
 	 */
 	public void updateKeyListener(KeyListener listener){
 		contentPane.addKeyListener(listener);
+	}
+	
+	/**
+	 *  restartGui:
+	 *  	- Restarts the Gui after restarting the game
+	 */
+	public void restartGui(){
+		for (int i = 0; i < 100; i++){
+			snakeLocations[i].setBackground(Color.white);
+		}
 	}
 
 
