@@ -37,6 +37,8 @@ public class SnakeLogic{
 	private static int difficultyMaxIndex = 3;
 	// Difficulty level
 	private int difficulty;
+	// default difficulty level
+	private static int defaultDifficulty = 100;
 	/**
 	 * 	This is the constructor for the SnakeLogic class. 
 	 * 	It creates the SnakeLogic which the game is based on
@@ -68,14 +70,13 @@ public class SnakeLogic{
 		filled = 1;
 		direction = "";
 		this.newBaitLocation();
-		selectDifficulty();
+		difficulty = defaultDifficulty;
 		snakeFrame.restartGui();
 		try {
 	        while (true) {
 	        	printSnake();
-				Thread.sleep(difficulty * 10);
+				Thread.sleep(difficulty);
 				snakeMove(direction);
-				Thread.sleep(5 * 10);
 	        }
 	    } catch (InterruptedException e) {
 	        e.printStackTrace();
@@ -144,6 +145,9 @@ public class SnakeLogic{
 	private void isEaton(int firstMove){
 		if((mainboard[0]+firstMove) == baitLocation){
 			filled++;
+			if((filled % 4) == 0){
+				updateDifficulty();
+			}
 			newBaitLocation();
 		}
 	}
@@ -304,5 +308,17 @@ public class SnakeLogic{
 			difficulty = 15;
 		}
 	}
+	
+	 /**
+	 * 	selectDifficulty:
+	 * 	Selects the difficulty of the game between Extreme, Hard, Normal, Easy 
+	 * 
+	 */
+	 private void updateDifficulty(){
+		 if(difficulty < 60){
+			 return;
+		 }
+		 difficulty -= 6;
+	 }
 	
 }
